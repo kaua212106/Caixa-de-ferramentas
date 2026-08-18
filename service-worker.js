@@ -1,5 +1,5 @@
 const CACHE='caixa-ferramentas-v2.0.0';
-const CORE=['./','./index.html','./manifest.json','./icone.png'];
+const CORE=['./','./index.html','./manifest.json','./icone.png','./auth-guard-v3.js'];
 const QR_LIB='https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
 self.addEventListener('install',event=>{event.waitUntil((async()=>{const cache=await caches.open(CACHE);await cache.addAll(CORE);try{await cache.add(QR_LIB)}catch{}await self.skipWaiting()})())});
 self.addEventListener('activate',event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
