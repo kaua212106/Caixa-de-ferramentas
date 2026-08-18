@@ -1,0 +1,8 @@
+const CACHE='caixa-ferramentas-v2.0.0';
+const CORE=['./','./index.html','./manifest.json','./icone.png'];
+const QR_LIB='https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
+self.addEventListener('install',event=>{event.waitUntil((async()=>{const cache=await caches.open(CACHE);await cache.addAll(CORE);try{await cache.add(QR_LIB)}catch{}await self.skipWaiting()})())});
+self.addEventListener('activate',event=>{event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
+self.addEventListener('fetch',event=>{const req=event.request;if(req.method!=='GET')return;const url=new URL(req.url);const nav=req.mode==='navigate',currency=url.hostname==='api.frankfurter.dev';if(currency){event.respondWith(fetch(req).then(res=>{const c=res.clone();caches.open(CACHE).then(x=>x.put(req,c));return res}).catch(()=>caches.match(req)));return}if(nav){event.respondWith(fetch(req).then(res=>{const c=res.clone();caches.open(CACHE).then(x=>x.put('./index.html',c));return res}).catch(()=>caches.match('./index.html')));return}event.respondWith(caches.match(req).then(hit=>hit||fetch(req).then(res=>{if(res&&(res.status===200||res.type==='opaque')){const c=res.clone();caches.open(CACHE).then(x=>x.put(req,c))}return res}))) });
+self.addEventListener('message',event=>{if(event.data==='SKIP_WAITING')self.skipWaiting()});
+self.addEventListener('notificationclick',event=>{event.notification.close();event.waitUntil((async()=>{const all=await clients.matchAll({type:'window',includeUncontrolled:true});for(const c of all){if('focus'in c){await c.focus();c.postMessage?.({type:'OPEN_TIMER'});return}}if(clients.openWindow)await clients.openWindow('./index.html?tool=timer')})())});
