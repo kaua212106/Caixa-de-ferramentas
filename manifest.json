@@ -1,0 +1,71 @@
+{
+  "id": "./",
+  "name": "Caixa de Ferramentas",
+  "short_name": "Ferramentas",
+  "description": "Calculadoras, conversores, QR, Pix, senhas, cronômetros e outras utilidades em um só app.",
+  "lang": "pt-BR",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#7046bd",
+  "theme_color": "#6079ea",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icone.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Calculadora",
+      "short_name": "Calcular",
+      "url": "./index.html?tool=calculator",
+      "icons": [
+        {
+          "src": "icone.png",
+          "sizes": "512x512",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "QR Studio",
+      "short_name": "QR Code",
+      "url": "./index.html?tool=qr",
+      "icons": [
+        {
+          "src": "icone.png",
+          "sizes": "512x512",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Gerar senha",
+      "short_name": "Senha",
+      "url": "./index.html?tool=password",
+      "icons": [
+        {
+          "src": "icone.png",
+          "sizes": "512x512",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Temporizador",
+      "short_name": "Timer",
+      "url": "./index.html?tool=timer",
+      "icons": [
+        {
+          "src": "icone.png",
+          "sizes": "512x512",
+          "type": "image/png"
+        }
+      ]
+    }
+  ]
+}
